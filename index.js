@@ -103,6 +103,17 @@ function animate(){
     c.clearRect(0, 0, canvas.width, canvas.height)
     boundaries.forEach((boundary) => {
         boundary.draw()
+
+        if (
+
+            player.position.y - player.radius <= boundary.position.y + boundary.height && 
+            player.position.x + player.radius >= boundary.position.x &&
+            player.position.y + player.radius >= boundary.position.y &&
+            player.position.x-player. radius <= boundary.position. x + boundary.width
+        ){
+            console.log('we are colliding')
+
+        }        
     })
     player.update()
     player.velocity.x = 0
