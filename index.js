@@ -1,30 +1,48 @@
-<<<<<<< HEAD
 const canvas = document.querySelector('canvas')
 const c = canvas.getContext('2d')
 
 canvas.width = innerWidth
 canvas.height = innerHeight
 
-const boundary = new Boundries({
-    position: {
-        x: 0,
-        y: 0
+class Boundary {
+    constructor({position}) {
+        this.position = position
+        this.width = 40
+        this.height = 40
     }
-})
-
-=======
-const canvas = document.querySelector('canvas')
-const c = canvas.getContext('2d')
-
-canvas.width = innerWidth
-canvas.height = innerHeight
-
-const boundary = new Boundries({
-    position: {
-        x: 0,
-        y: 0
+    
+    draw() {
+        c.fillStyle = 'blue'
+        c.fillRect(this.position.x, this.position.y, this.width, this.height)
     }
-})
+}
 
->>>>>>> e8b0906306f4c754bd04211ab7381b737db925de
-boundary.draw()
+const map = [
+    ['-', '-', '-', '-', '-', '-'],
+    ['-', ' ', ' ', ' ', ' ', '-'],
+    ['-', '-', '-', '-', '-', '-'],
+    ['-', '-', '-', '-', '-', '-']
+]
+
+const boundaries = []
+
+map.forEach((row, i ) => {
+    row.forEach((symbol) =>{
+     switch (symbol) {
+        case '-':
+            boundaries.push(
+                new Boundary({
+                    position: {
+                        x: 40,
+                        y: 40 * i
+                    }
+                })
+            )
+            break
+      }
+    })
+})
+boundaries.forEach((boundary) => {
+    boundary.draw()
+})
+    
