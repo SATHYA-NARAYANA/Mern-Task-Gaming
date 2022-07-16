@@ -27,13 +27,13 @@ const map = [
 const boundaries = []
 
 map.forEach((row, i ) => {
-    row.forEach((symbol) =>{
+    row.forEach((symbol, j) =>{
      switch (symbol) {
         case '-':
             boundaries.push(
                 new Boundary({
                     position: {
-                        x: 40,
+                        x: 40 * j,
                         y: 40 * i
                     }
                 })
