@@ -36,8 +36,8 @@ map.forEach((row, i ) => {
             boundaries.push(
                 new Boundary({
                     position: {
-                        x: 40 * j,
-                        y: 40 * i
+                        x: Boundary.width * j,
+                        y: Boundary.height * i
                     }
                 })
             )
