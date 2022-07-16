@@ -95,12 +95,27 @@ map.forEach((row, i ) => {
       }
     })
 })
-boundaries.forEach((boundary) => {
-    boundary.draw()
-})
+function circleCollidesWithRectangle({ circle, rectangle }){
+    return(circle.position.y - circle.radius + circle.velocity.y <= rectangle.position.y + rectangle.height && 
+          circle.position.x + circle.radius + circle.velocity.x >= rectangle.position.x &&
+          circle.position.y + circle.radius + circle.velocity.y >= rectangle.position.y &&
+          circle.position.x - circle. radius + circle.velocity.x <= rectangle.position. x + rectangle.width)
+}
 function animate(){
     requestAnimationFrame(animate)
     c.clearRect(0, 0, canvas.width, canvas.height)
+
+    if (keys.w.pressed && lastKey === 'w') {
+        
+        player.velocity.y = -5
+    } else if (keys.a.pressed && lastKey === 'a'){
+        player.velocity.x = -5
+    }else if (keys.s.pressed && lastKey === 's'){
+        player.velocity.y = 5
+    }else if (keys.d.pressed && lastKey === 'd'){
+        player.velocity.x = 5
+    }
+
     boundaries.forEach((boundary) => {
         boundary.draw()
 
@@ -121,15 +136,7 @@ function animate(){
     //player.velocity.x = 0
     //player.velocity.y = 0
 
-    if (keys.w.pressed && lastKey === 'w') {
-        player.velocity.y = -5
-    } else if (keys.a.pressed && lastKey === 'a'){
-        player.velocity.x = -5
-    }else if (keys.s.pressed && lastKey === 's'){
-        player.velocity.y = 5
-    }else if (keys.d.pressed && lastKey === 'd'){
-        player.velocity.x = 5
-    }
+  
 }
 animate()
 
