@@ -83,13 +83,13 @@ boundaries.forEach((boundary) => {
 })
 function animate(){
     requestAnimationFrame(animate)
-    console.log('adfggg')
+    boundaries.forEach((boundary) => {
+        boundary.draw()
+    })
+    player.update()
 }
 animate()
-boundaries.forEach((boundary) => {
-    boundary.draw()
-})
-player.update()
+
 
 addEventListener('keydown', ({ key }) => { 
     switch (key) {
