@@ -46,7 +46,7 @@ const map = [
 const boundaries = []
 const player = new Player({
     position: {
-        x: Boundary.width + Boundary.width /2,
+        x: Boundary.width + Boundary.width / 2,
         y: Boundary.height + Boundary.height / 2
     },
     velocity: {
@@ -76,3 +76,16 @@ boundaries.forEach((boundary) => {
 })
 
 player.draw()
+
+addEventListener('keydown', () => {
+    console.log('asafdfasfdg')
+})
+
+
+
+
+
+
+
+
+
