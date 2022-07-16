@@ -83,6 +83,7 @@ boundaries.forEach((boundary) => {
 })
 function animate(){
     requestAnimationFrame(animate)
+    c.clearRect(0, 0, canvas.width, canvas.height)
     boundaries.forEach((boundary) => {
         boundary.draw()
     })
@@ -97,7 +98,7 @@ addEventListener('keydown', ({ key }) => {
             player.velocity.y = -5
             break
         case 'a':
-                player.velocity.y = -5
+                player.velocity.x = -5
                 break
         case 's':
                 player.velocity.y = 5
@@ -106,6 +107,23 @@ addEventListener('keydown', ({ key }) => {
                     player.velocity.x = 5
                     break
     }
+addEventListener('keydown', ({ key }) => {
+    switch (key) {
+        case 'w':
+            player.velocity.y = -5
+            break
+        case 'a':
+                player.velocity.x = -5
+                break
+        case 's':
+                player.velocity.y = 5
+                break
+        case 'd':
+                    player.velocity.x = 5
+                    break
+    }
+
+})
 
     console.log(player.velocity)
 })
