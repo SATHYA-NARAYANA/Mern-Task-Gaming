@@ -5,6 +5,8 @@ canvas.width = innerWidth
 canvas.height = innerHeight
 
 class Boundary {
+    static width = 40
+    static height = 40
     constructor({position}) {
         this.position = position
         this.width = 40
@@ -20,7 +22,8 @@ class Boundary {
 const map = [
     ['-', '-', '-', '-', '-', '-'],
     ['-', ' ', ' ', ' ', ' ', '-'],
-    ['-', '-', '-', '-', '-', '-'],
+    ['-', ' ', '-', '-', ' ', '-'],
+    ['-', ' ', ' ', ' ', ' ', '-'],
     ['-', '-', '-', '-', '-', '-']
 ]
 
