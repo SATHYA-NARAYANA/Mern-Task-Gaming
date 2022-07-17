@@ -95,11 +95,11 @@ const ghosts = [
 
     new Ghost({
         position: {
-            x: 0,
-            y: 0
+            x: Boundary.width * 6 + Boundary.width / 2,
+            y: Boundary.height + Boundary.height / 2
         },
         velocity: {
-            x: 0,
+            x: 5,
             y: 0
         }
     })
@@ -496,6 +496,85 @@ function animate(){
 
     ghosts.forEach(ghost => {
         ghost.update()
+
+
+        const collisions = []
+        boundaries.forEach(boundary => {
+
+            if (
+                !collisions.includes('right') &&
+                circleCollidesWithRectangle({
+                    circle: 
+                    {
+                        ...ghost, 
+                        velocity:{
+                            x: 5,
+                            y: 0
+                        }
+                }, ///... is a spread operator
+                    rectangle: boundary
+                })
+                ){
+                        collisions.push('right')
+                }
+
+                if (
+                    !collisions.includes('left') &&
+                    circleCollidesWithRectangle({
+                        circle: 
+                        {
+                            ...ghost, 
+                            velocity:{
+                                x: -5,
+                                y: 0
+                            }
+                    }, ///... is a spread operator
+                        rectangle: boundary
+                    })
+                    ){
+                            collisions.push('left')
+                    }
+
+                    if (
+                        !collisions.includes('up') &&
+                        circleCollidesWithRectangle({
+                            circle: 
+                            {
+                                ...ghost, 
+                                velocity:{
+                                    x: 0,
+                                    y: -5
+                                }
+                        }, ///... is a spread operator
+                            rectangle: boundary
+                        })
+                        ){
+                                collisions.push('up')
+                        }
+
+                        if (
+                            !collisions.includes('down') &&
+                            circleCollidesWithRectangle({
+                                circle: 
+                                {
+                                    ...ghost, 
+                                    velocity:{
+                                        x: 0,
+                                        y: 5
+                                    }
+                            }, ///... is a spread operator
+                                rectangle: boundary
+                            })
+                            ){
+                                    collisions.push('down')
+                            }
+    
+
+        })
+
+        console.log(collisions)
+
+
     })
 
   
