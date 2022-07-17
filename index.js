@@ -414,14 +414,22 @@ function animate(){
 
 
     }
-
-    pellets.forEach(pellet => {
+    for (let i = pellets. length - 1; 0 < i; i--) {
+        const pellet = pellets[i] 
         pellet.draw()
-    })  
-
+        if ( 
+            Math.hypot( //hypot is used to add difference between x co-ordinates and y co-ordinates
+                pellet.position.x - player.position.x, 
+                pellet.position.y - player.position.y
+            ) <
+        pellet.radius + player.radius
+        ) {
+        console.log('touching') 
+        pellets.splice(i, 1)
+    }
+}
     boundaries.forEach((boundary) => {
         boundary.draw()
-
         if (
 
             circleCollidesWithRectangle({
