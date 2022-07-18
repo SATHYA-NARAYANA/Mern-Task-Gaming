@@ -11,4 +11,4 @@
 10. Added more ghosts
 11. Powerups advantage to player done
 12. Pacman Face created 
-13. Done with Gamming 
+13. Finish with Gamming 

@@ -18,7 +18,7 @@ class Boundary {
     }
     
     draw() {
-       // c.fillStyle = 'blue'
+       // c.fillStyle = ' blue '
        // c.fillRect(this.position.x, this.position.y, this.width, this.height)
        c.drawImage(this.image, this.position.x, this.position.y)
     }
