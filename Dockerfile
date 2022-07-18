@@ -10,4 +10,5 @@
 9. Set constraints for ghost
 10. Added more ghosts
 11. Powerups advantage to player done
-12. Win Property added
+12. Pacman Face created 
+13. Done with Gamming 
