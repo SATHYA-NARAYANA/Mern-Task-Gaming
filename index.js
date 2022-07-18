@@ -92,8 +92,28 @@ class Pellet {
     }
 }
 
+
+// Creating powerups
+
+class powerUp {
+    constructor({ position }) {
+        this.position = position
+        this.radius = 10
+    }
+
+    draw() {
+        c.beginPath()
+        c.arc(this.position.x, this.position.y, this.radius, 0, Math.PI * 2)
+        c.fillStyle = 'white'
+        c.fill()
+        c.closePath()
+    }
+}
+
+
 const pellets = []
 const boundaries = []
+const powerUps = []
 const ghosts = [
 
     new Ghost({
@@ -380,6 +400,17 @@ map.forEach((row, i ) => {
                   })
                 )
                  break
+        case 'p':
+                powerUps.push(
+                    new powerUp({
+                        position: {
+                            x: j * Boundary.width + Boundary.width / 2,
+                            y: i * Boundary.height + Boundary.height / 2
+                         }
+                    })
+                )
+                 break               
+    
       }
     })
 })
@@ -488,6 +519,14 @@ function animate(){
                 }
             }
     }
+
+    // for powerup adding and rendering object created above 
+    for (let i = powerUps. length - 1; 0 < i; i--) {
+        const powerUp = powerUps[i]
+        powerUp.draw()
+
+    }
+
 
     // for score touching pellets here we added some conditions
     for (let i = pellets. length - 1; 0 < i; i--) {
