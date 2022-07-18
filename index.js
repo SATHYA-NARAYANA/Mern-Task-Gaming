@@ -367,8 +367,10 @@ function circleCollidesWithRectangle({ circle, rectangle }){
           circle.position.y + circle.radius + circle.velocity.y >= rectangle.position.y - padding &&
           circle.position.x - circle. radius + circle.velocity.x <= rectangle.position. x + rectangle.width + padding)
 }
+
+let animationId
 function animate(){
-    requestAnimationFrame(animate)
+    animationId =  requestAnimationFrame(animate)
     c.clearRect(0, 0, canvas.width, canvas.height)
 
     if (keys.w.pressed && lastKey === 'w') {
@@ -500,6 +502,16 @@ function animate(){
 
     ghosts.forEach(ghost => {
         ghost.update()
+        if ( 
+            Math.hypot( //hypot is used to add difference between x co-ordinates and y co-ordinates
+                ghost.position.x - player.position.x, 
+                ghost.position.y - player.position.y
+            ) <
+        ghost.radius + player.radius
+        ) {
+            cancelAnimationFrame(animationId)
+            console.log('YOU LOSE')
+        }
 
 
         const collisions = []
