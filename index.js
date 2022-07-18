@@ -48,11 +48,14 @@ class Player {
 // creating ghost player using player code
 
 class Ghost {
+    static speed = 2
     constructor({ position, velocity, color = 'red'}) {
         this.position = position
         this.velocity = velocity
         this.radius = 15
         this.color = color
+        this.prevCollisions = []
+        this.speed = 2
     }
 
     draw() {
@@ -99,7 +102,7 @@ const ghosts = [
             y: Boundary.height + Boundary.height / 2
         },
         velocity: {
-            x: 5,
+            x: Ghost.speed,
             y: 0
         }
     })
@@ -358,10 +361,11 @@ map.forEach((row, i ) => {
     })
 })
 function circleCollidesWithRectangle({ circle, rectangle }){
-    return(circle.position.y - circle.radius + circle.velocity.y <= rectangle.position.y + rectangle.height && 
-          circle.position.x + circle.radius + circle.velocity.x >= rectangle.position.x &&
-          circle.position.y + circle.radius + circle.velocity.y >= rectangle.position.y &&
-          circle.position.x - circle. radius + circle.velocity.x <= rectangle.position. x + rectangle.width)
+    const padding = Boundary.width / 2 - circle.radius - 1
+    return(circle.position.y - circle.radius + circle.velocity.y <= rectangle.position.y + rectangle.height + padding && 
+          circle.position.x + circle.radius + circle.velocity.x >= rectangle.position.x - padding&&
+          circle.position.y + circle.radius + circle.velocity.y >= rectangle.position.y - padding &&
+          circle.position.x - circle. radius + circle.velocity.x <= rectangle.position. x + rectangle.width + padding)
 }
 function animate(){
     requestAnimationFrame(animate)
@@ -508,7 +512,7 @@ function animate(){
                     {
                         ...ghost, 
                         velocity:{
-                            x: 5,
+                            x: ghost.speed,
                             y: 0
                         }
                 }, ///... is a spread operator
@@ -525,7 +529,7 @@ function animate(){
                         {
                             ...ghost, 
                             velocity:{
-                                x: -5,
+                                x: -ghost.speed,
                                 y: 0
                             }
                     }, ///... is a spread operator
@@ -543,7 +547,7 @@ function animate(){
                                 ...ghost, 
                                 velocity:{
                                     x: 0,
-                                    y: -5
+                                    y: -ghost.speed
                                 }
                         }, ///... is a spread operator
                             rectangle: boundary
@@ -560,7 +564,7 @@ function animate(){
                                     ...ghost, 
                                     velocity:{
                                         x: 0,
-                                        y: 5
+                                        y: ghost.speed
                                     }
                             }, ///... is a spread operator
                                 rectangle: boundary
@@ -572,7 +576,52 @@ function animate(){
 
         })
 
-        console.log(collisions)
+        if (collisions.length > ghost.prevCollisions.length)
+            ghost.prevCollisions = collisions
+
+        if (JSON.stringify(collisions) !== JSON.stringify(ghost.prevCollisions)) 
+        {
+            //console.log('hjjjhggf')
+
+            if (ghost.velocity.x > 0) ghost.prevCollisions.push('right')
+            else if (ghost.velocity.x < 0) ghost.prevCollisions.push('left')
+            else if (ghost.velocity.y < 0) ghost.prevCollisions.push('up')
+            else if (ghost.velocity.y > 0) ghost.prevCollisions.push('down')
+             console.log(collisions)
+             console.log(ghost.prevCollisions)
+
+            const pathways = ghost.prevCollisions.filter((collision) => {
+                return !collisions.includes(collision)
+            })
+            console.log({ pathways})
+
+            const direction = pathways[Math.floor(Math.random() * pathways.length)]
+            console.log({ direction})
+
+            switch (direction) {
+                case 'down':
+                    ghost.velocity.y = ghost.speed
+                    ghost.velocity.x = 0
+                    break
+                case 'up':
+                    ghost.velocity.y = -ghost.speed
+                    ghost.velocity.x = 0
+                    break 
+                case 'right':
+                    ghost.velocity.y = 0
+                    ghost.velocity.x = ghost.speed
+                    break 
+                case 'left':
+                    ghost.velocity.y = 0
+                    ghost.velocity.x = -ghost.speed
+                    break                  
+                
+            }
+
+            ghost.prevCollisions = []
+        }
+
+        //console.log(collisions)
 
 
     })
