@@ -56,12 +56,13 @@ class Ghost {
         this.color = color
         this.prevCollisions = []
         this.speed = 2
+        this.scared = false
     }
 
     draw() {
         c.beginPath()
         c.arc(this.position.x, this.position.y, this.radius, 0, Math.PI * 2)
-        c.fillStyle = this.color
+        c.fillStyle = this.scared ? 'blue' : this.color
         c.fill()
         c.closePath()
     }
@@ -520,18 +521,53 @@ function animate(){
             }
     }
 
+    // detect collision between ghosts and player
+    for (let i = ghosts. length - 1; 0 <= i; i--) {
+        const ghost = ghosts[i]
+    // ghost touch player 
+      if ( 
+        Math.hypot( //hypot is used to add difference between x co-ordinates and y co-ordinates
+            ghost.position.x - player.position.x, 
+            ghost.position.y - player.position.y
+        ) <
+    ghost.radius + player.radius  
+    ) {
+        if (ghost.scared){
+            ghosts.splice(i, 1)
+        }else {
+            cancelAnimationFrame(animationId)
+            console.log('YOU LOSE')
+        }
+        
+    }
+    }
+
+
     // for powerup adding and rendering object created above 
     for (let i = powerUps. length - 1; 0 <= i; i--) {
         const powerUp = powerUps[i]
         powerUp.draw()
+
+        //player collides with powerup
         if ( 
-            Math.hypot( //hypot is used to add difference between x co-ordinates and y co-ordinates
+            Math.hypot(  
                 powerUp.position.x - player.position.x, 
                 powerUp.position.y - player.position.y
             ) <
         powerUp.radius + player.radius
         ){
             powerUps.splice(i, 1)
+
+            //make ghost scared
+            ghosts.forEach(ghost => {
+                ghost.scared = true
+                 
+
+                setTimeout(() => {
+                    ghost.scared = false
+                     
+                }, 5000)
+            })
         }
 
 
@@ -574,17 +610,8 @@ function animate(){
 
     ghosts.forEach(ghost => {
         ghost.update()
-        if ( 
-            Math.hypot( //hypot is used to add difference between x co-ordinates and y co-ordinates
-                ghost.position.x - player.position.x, 
-                ghost.position.y - player.position.y
-            ) <
-        ghost.radius + player.radius
-        ) {
-            cancelAnimationFrame(animationId)
-            console.log('YOU LOSE')
-        }
 
+      
 
         const collisions = []
         boundaries.forEach(boundary => {

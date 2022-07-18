@@ -9,3 +9,4 @@
 7. Added Ghost
 9. Set constraints for ghost
 10. Added more ghosts
+11. Powerups advantage to player done 
