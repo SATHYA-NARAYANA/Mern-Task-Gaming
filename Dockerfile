@@ -6,3 +6,6 @@
 6. Pellets has been added 
 7. Removed pellets on collission with hypot 
 8. Added Score 
+7. Added Ghost
+9. Set constraints for ghost
+10. Added more ghosts
