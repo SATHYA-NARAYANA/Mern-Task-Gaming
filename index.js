@@ -533,13 +533,19 @@ function animate(){
     ghost.radius + player.radius  
     ) {
         if (ghost.scared){
-            ghosts.splice(i, 1)
+            ghosts.splice(i, 3)
         }else {
             cancelAnimationFrame(animationId)
             console.log('YOU LOSE')
         }
         
     }
+    }
+
+    // player win condition
+    if (pellets.length ===0){
+        console.log('YOU WIN')
+        cancelAnimationFrame(animationId)
     }
 
 
