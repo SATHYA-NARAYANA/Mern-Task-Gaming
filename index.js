@@ -98,7 +98,7 @@ class Pellet {
 class powerUp {
     constructor({ position }) {
         this.position = position
-        this.radius = 10
+        this.radius = 7
     }
 
     draw() {
@@ -521,15 +521,25 @@ function animate(){
     }
 
     // for powerup adding and rendering object created above 
-    for (let i = powerUps. length - 1; 0 < i; i--) {
+    for (let i = powerUps. length - 1; 0 <= i; i--) {
         const powerUp = powerUps[i]
         powerUp.draw()
+        if ( 
+            Math.hypot( //hypot is used to add difference between x co-ordinates and y co-ordinates
+                powerUp.position.x - player.position.x, 
+                powerUp.position.y - player.position.y
+            ) <
+        powerUp.radius + player.radius
+        ){
+            powerUps.splice(i, 1)
+        }
+
 
     }
 
 
     // for score touching pellets here we added some conditions
-    for (let i = pellets. length - 1; 0 < i; i--) {
+    for (let i = pellets. length - 1; 0 <= i; i--) {
         const pellet = pellets[i] 
         pellet.draw()
         if ( 
