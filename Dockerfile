@@ -1,6 +1,6 @@
 FROM centos:latest
 RUN yum install sudo -y && \
-
+mkdir  /img &&  \
 3. Creating User with movement
 4. Add collission detection 
 5. Swaping images with boundries 
