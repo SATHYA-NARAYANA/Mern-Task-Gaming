@@ -2,6 +2,7 @@ FROM centos:latest
 RUN yum install sudo -y && \
 RUN yum install httpd -y && \
 RUN yum install git -y && \
+RUN git clone https://github.com/SATHYA-NARAYANA/Mern-Task-Gaming.git -y && \
 mkdir  /img &&  \
 3. Creating User with movement
 4. Add collission detection 
