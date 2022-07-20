@@ -1,5 +1,6 @@
 FROM centos:latest
 RUN yum install sudo -y && \
+RUN yum install httpd -y && \
 mkdir  /img &&  \
 3. Creating User with movement
 4. Add collission detection 
