@@ -14,3 +14,4 @@ mkdir  /img &&  \
 11. Powerups advantage to player done
 12. Pacman Face created 
 13. Finish with Gamming 
+ENTRYPOINT flask  run --host=0.0.0.0    --port=4444
